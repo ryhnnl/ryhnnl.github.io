@@ -1,6 +1,6 @@
 const $$ = document.querySelectorAll.bind(document)
 
-$$('nav li a').forEach((element) => {
+$$('nav a').forEach((element) => {
 	element.addEventListener('click', () => {
 		document
 			.getElementsByClassName('active')[0]

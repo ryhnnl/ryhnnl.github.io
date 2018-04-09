@@ -1,6 +1,6 @@
 :root {
 	--light-color: #f1f1f1;
-	--gray: #c4c4c4;
+	--gray: #aaa;
 	--dark-color: #2f3640;
 	--color: #ff5252;
 }
@@ -9,6 +9,7 @@ html,
 body {
 	margin: 0;
 	font-family: 'Comfortaa', cursive;
+	background-color: var(--light-color);
 }
 * {
 	margin: 0;
@@ -23,40 +24,38 @@ nav {
 	align-content: center;
 	justify-content: center;
 	width: 100%;
-	height: 100px;
+	min-height: 50px;
 	background-color: var(--light-color);
 }
-
-nav ul {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	list-style: none;
-}
-nav ul li {
-	margin: 0 1em;
+nav.dark {
+	background-color: var(--dark-color);
 }
 
-nav ul li a {
+nav.go-back-link {
+	justify-content: flex-start;
+}
+
+nav a {
+	margin: 1em;
 	color: var(--gray);
 	text-decoration: none;
 }
-nav ul li a:hover {
+nav a:hover {
 	color: var(--color);
 }
-nav ul li a:active {
+nav a:active {
 	color: var(--color);
 }
-nav ul li a.active {
+nav a.active {
 	color: var(--color);
 }
 
 /*SECTION*/
 
 .section.start {
-	margin-top: 100px;
+	margin-top: 50px;
 	height: 75vh;
+	cursor: default;
 }
 
 .section:nth-of-type(n) {
@@ -67,7 +66,14 @@ nav ul li a.active {
 	background-color: var(--dark-color);
 	color: var(--light-color);
 }
-
+.section.dark:nth-last-of-type(n) {
+	background-color: var(--light-color);
+	color: var(--dark-color);
+}
+.section.dark:nth-of-type(2n) {
+	background-color: var(--dark-color);
+	color: var(--light-color);
+}
 .section {
 	min-height: 400px;
 	display: flex;
@@ -83,8 +89,8 @@ span.text-colored {
 }
 
 span.fixme {
-	margin-top: -100px;
-	padding-bottom: 100px;
+	margin-top: -45px;
+	padding-bottom: 45px;
 	display: block;
 }
 
@@ -185,4 +191,40 @@ a {
 }
 .section:nth-of-type(2n) a {
 	color: var(--light-color);
+}
+/* Kod Renklendirme */
+code pre {
+	font-family: 'Fira Mono', monospace;
+	color: #2c2c54;
+}
+code pre .expr1 {
+	color: #227093;
+}
+code pre .expr2 {
+	color: #b33939;
+}
+code pre .expr3 {
+	color: #218c74;
+}
+code pre var {
+	color: #cd6133;
+}
+code pre .expr4 {
+	color: #9c9cc4;
+}
+
+div.text-content {
+	line-height: 1.5em;
+	padding: 2em 10%;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: space-evenly;
+}
+div.text-content p {
+	margin: 1em;
+}
+div.text-content code {
+	background: var(--light-color);
+	padding: 1em;
 }
