@@ -63,7 +63,7 @@ nav button.menu {
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: flex-start;
-		box-shadow: 0 2px 4px 0 rgba(127, 127, 127, 127);
+		box-shadow: 0 0 4px 0 #2c2c54c4;
 	}
 	nav a {
 		flex: 1;
@@ -79,7 +79,7 @@ nav button.menu {
 		cursor: pointer;
 		background-color: var(--light-color);
 		color: var(--dark-color);
-		box-shadow: -1px -1px 1px 0 rgba(127, 127, 127, 127);
+		box-shadow: -1px -1px 1px 0 #2c2c5452;
 		border: none;
 		outline: none;
 		position: absolute;
