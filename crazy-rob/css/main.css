@@ -202,7 +202,18 @@ h3 {
 	height: 100px;
 	width: auto;
 }
-
+.flex-container .flex-item.img-link-container a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 120px;
+	min-width: 200px;
+}
+.flex-container .flex-item.img-link-container a img {
+	width: 80px;
+	height: auto;
+}
 /* FLEX for TEAM */
 .flex-container.team .flex-item {
 	min-height: 200px;
