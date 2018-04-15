@@ -100,7 +100,7 @@
 <span class="expr3">const int</span> <var>zPin</var> = A2; <span class="expr4">// Joy 2 X</span>
 <span class="expr3">const int</span> <var>uPin</var> = A3; <span class="expr4">// Joy 2 Y</span>
         
-<span class="expr3">const int</span> <var>servoPin</var> = 13; <span class="expr4">Servo Motor Pini</span>
+<span class="expr3">const int</span> <var>servoPin</var> = 13; <span class="expr4">// Servo Motor Pini</span>
 <span class="expr3">const Servo</span> <var>servoMotor</var>;
 <span class="expr3">int</span> <var>servoValue</var> = 0;
                 </pre>
@@ -289,11 +289,11 @@
     açılıp kapanması sağlanır. */</span>
 
     <span class="expr1">if</span>(<var>yValue</var> &lt; 470) {
-      <span class="expr4">/// x degeri 470'den küçükse</span>
+      <span class="expr4">/// y degeri 470'den küçükse</span>
       <span class="expr2">moveBack</span>(<var>motor1</var>);
       
       }<span class="expr1">else if</span>(<var>yValue</var> &gt; 600) {
-        <span class="expr4">/// x degeri 600'den büyükse</span>
+        <span class="expr4">/// y degeri 600'den büyükse</span>
         <span class="expr2">moveNext</span>(<var>motor1</var>);
         }
     <span class="expr1">if</span>(<var>xValue</var> &lt; 470) {
@@ -303,14 +303,6 @@
       }<span class="expr1">else if</span>(<var>xValue</var> &gt; 600) {
         <span class="expr4">/// x degeri 600'den büyükse</span>
         <span class="expr2">moveNext</span>(<var>motor2</var>);
-        }
-    <span class="expr1">if</span>(<var>zValue</var> &lt; 470) {
-        <span class="expr4">/// y degeri 470'den küçükse</span>
-        <span class="expr2">moveBack</span>(<var>motor3</var>);
-      
-      }<span class="expr1">else if</span>(<var>zValue</var> &gt; 600) {
-        <span class="expr4">/// y degeri 600'den büyükse</span>
-        <span class="expr2">moveNext</span>(<var>motor3</var>);
         }
     <span class="expr1">if</span>(<var>zValue</var> &lt; 470) {
         <span class="expr4">/// z degeri 470'den küçükse</span>
