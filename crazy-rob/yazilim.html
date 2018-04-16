@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116990910-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-116990910-1');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CrazyRob</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+</head>
+
+<body>
+
+    <nav>
+        <a href="#" class="active">Başlangıç</a>
+        <a href="#flowchart">Akış Şeması</a>
+        <a href="#code">Kodlama</a>
+        <a href="./index.html">Anasayfa</a>
+        <button class="menu">&#9776;</button>
+    </nav>
+    <section class="section start">
+            <span class="fixme" id="start"> &nbsp; </span>
+            <h1>
+                <span class="text-colored">CrazyRob</span> Yazılım Aşaması</h1>
+            <h3>Gömülü Sistemler Projesi - 2018</h3>
+    </section>
+    
+    <!--AKIŞ ŞEMASI-->
+    <section class="section">
+        <span class="fixme" id="flowchart"> &nbsp; </span>
+        
+        <div class="subtitlebox">
+            <h5>Akış Şeması</h5>
+            <div class="border"></div>
+        </div>
+
+        <div class="flex-container">
+            <a class="flex-item img-link-container" href="./img/software/flowchart.svg">
+                <img src="./img/flowchart.png" alt="Akış Diyagramı İkonu">
+                <span>Akış Şeması SVG Dosyası</span>
+            </a>
+        </div>
+
+    </section>
+    
+    <!--KODLAMA-->
+    <section class="section">
+        <span class="fixme" id="code"> &nbsp; </span>
+        
+        <div class="subtitlebox">
+            <h5>Kodlama</h5>
+            <div class="border"></div>
+        </div>
+
+        <div class="text-content">
+
+                <p>
+                    Projede arduinoya bağlı olan elektronik cihazlar arduino içerisine gömdüğümüz program tarafından kontrol edilmektedir. Bu
+                    program Arduino IDE üzerinde yazılıp Arduino Mega 2560 geliştirme kartına aktarılmıştır. Programda 2
+                    joyistikten alınan input değerlerine göre 4 step motor ve 1 servo motor kontrol edilmiştir.
+                </p>
+
+                <p>
+                    Arduino, joyistiğin 3 pininden değer okuyabilmektedir. Bunlardan biri joystick miline basılma durumuna göre 1 veya 0 değerini
+                    veren switch pinidir. Diğer ikisi ise milin x ve y yönündeki dönüşünün değerini 0 ile 1024 arasında bir
+                    değer olarak veren analog pinlerdir.
+                </p>
+
+                <p>
+                    Projede 4 step motor bulunduğundan bahsetmiştik. Programda ise 3 step motor göreceksiniz. Bunun nedeni step motorlardan 2'sinin
+                    robot kolun aynı yöndeki hareketini kontrol etmesi nedeni ile, birlikte bir motor olarak kontrol edilmelerinden
+                    kaynaklanmaktadır.
+                </p>
+
+                <p>
+                    Robot kolun x ve z eksenlerindeki hareketi, ilk joyistiğin x ve y yönündeki dönüş değerini veren analog pinlerinden okunan
+                    değerler ile kontrol edilmektedir. Dikey yani y eksenindeki hareketi ve gripper'ın açılıp kapanması ise
+                    ikinci joyistiğin x ve y pinleri ile kontrol edilmektedir.
+                </p>
+
+                <p>
+                    Programda ilk olarak motor pinleri, joystick giriş pinleri ve bekleme süresi global sabitler olarak tanımlanmıştır. Servo
+                    motor için Servo.h kütüphanesi eklenmiş ve ilk değer belirlenmiştir.
+                </p>
+                <code>
+                    <pre>
+<span class="expr1">#include</span> &lt;Servo.h&gt;
+
+<span class="expr3">const int</span> <var>motor1</var>[] = {4, 5, 6, 7}; <span class="expr4">// Step Motor 1 - X ekseni </span>
+<span class="expr3">const int</span> <var>motor2</var>[] = {8, 9, 10, 11}; <span class="expr4">// Step Motor 2 - Z ekseni </span>
+<span class="expr3">const int</span> <var>motor3</var>[] = {14, 15, 16, 17}; <span class="expr4">// Step Motor 3 - Y ekseni</span>
+        
+<span class="expr3">const int</span> <var>delayTime</var> = 2; <span class="expr4">//</span>
+<span class="expr3">const int</span> <var>xPin</var> = A0; <span class="expr4">// Joy 1 X</span>
+<span class="expr3">const int</span> <var>yPin</var> = A1; <span class="expr4">// Joy 1 Y</span>
+<span class="expr3">const int</span> <var>zPin</var> = A2; <span class="expr4">// Joy 2 X</span>
+<span class="expr3">const int</span> <var>uPin</var> = A3; <span class="expr4">// Joy 2 Y</span>
+        
+<span class="expr3">const int</span> <var>servoPin</var> = 13; <span class="expr4">// Servo Motor Pini</span>
+<span class="expr3">const Servo</span> <var>servoMotor</var>;
+<span class="expr3">int</span> <var>servoValue</var> = 0;
+                </pre>
+                </code>
+
+                <p>
+                    Setup fonksiyonu program başlatılırken yalnızca bir kez çalıştırılan kurulum fonksiyonudur. Burada pinlerin modların belirlenmiş,
+                    servo motor, pinine bağlanıp başlangıç açısı verilmiş ve seri monitör başlatılmıştır.
+                </p>
+                <code>
+                    <pre>
+<span class="expr3">void</span> setup() {
+    
+    <span class="expr4">/* For döngüsü içerisinde, başlangıçta tanımlanan motor pinleri
+    OUTPUT moduna getirilir. */</span>
+
+    for(int i=0; i&lt;4; i++) {
+      <span class="expr2">pinMode</span>(<var>motor1</var>[i], <span class="expr3">OUTPUT</span>);
+      <span class="expr2">pinMode</span>(<var>motor2</var>[i], <span class="expr3">OUTPUT</span>);
+      <span class="expr2">pinMode</span>(<var>motor3</var>[i], <span class="expr3">OUTPUT</span>);
+      }
+
+      <span class="expr4">/* Joystick pinleri ise INPUT moduna getirilir. */</span>
+
+      <span class="expr2">pinMode</span>(<var>xPin</var>, <span class="expr3">INPUT</span>);
+      <span class="expr2">pinMode</span>(<var>yPin</var>, <span class="expr3">INPUT</span>);
+      <span class="expr2">pinMode</span>(<var>zPin</var>, <span class="expr3">INPUT</span>);
+      <span class="expr2">pinMode</span>(<var>uPin</var>, <span class="expr3">INPUT</span>);
+      
+      <span class="expr4">/* Servo kütüphanesinin Servo sınıfından örneklenen servoMotor
+      değişkeni ile servo motorun bağlı olduğu pin iliştirilir. */</span>
+        
+      <var>servoMotor</var>.<span class="expr2">attach</span>(<var>servoPin</var>);
+
+      <span class="expr4">/* Ve servo motora başlangıç olarak servoValue'nin değeri verilir. */</span>
+        
+      <var>servoMotor</var>.<span class="expr2">write</span>(<var>servoValue</var>);
+      
+      Serial.<span class="expr2">begin</span>(9600);
+  }
+                </pre>
+                </code>
+
+                <p>
+                    Step motor arduinoya, step motor sürücü kartı ile bağlanmıştır. Bu kart üzerinde IN1, IN2, IN3, IN4 olarak berlirtilen giriş
+                    pinleri, programımızda tanımladığımız step motor çıkış pinlerine bağlıdırlar. Arduinonun bu çıkış pinlerine,
+                    sırasıyla 5V verilerek, step motorun bir tam adım atması sağlanır.
+                </p>
+
+                <p>
+                    Step motorların ileri ve geri adımları için iki ayrı fonksiyon yazılmıştır. Bu fonksiyonlar doğru pinlere doğru sırada sinyaller
+                    vererek hareketi sağlar. Fonksiyonlar parametre olarak hareket ettirecekleri motor pinlerini içeren integer
+                    diziyi alırlar. Ve geriye değer döndürmeden motorun her pinine sırasıyla
+                    <var>HIGH</var> değeri vererek bir tam adım atmasını sağlarlar.
+                </p>
+
+                <code>
+                    <pre>
+<span class="expr3">void</span> <span class="expr2">moveNext</span>(<span class="expr3">int</span> <var>motor</var>[]) {
+  
+  <span class="expr3">int</span> <var>_step</var> = 0;
+
+  <span class="expr4">/* Burada tanımlanan _step değişkeni, motorun
+  hangi indexteki pinine HIGH verileceğini tutmaktadır.
+  Aynı zamanda bir tam adımın kaçıncı çeyrek adımında olduğunu temsil etmektedir.
+  Bu fonksiyonda ileri tam adım atıldığı için 0. indexteki pinden adım başlamıştır. */</span>
+  
+  <span class="expr1">while</span>(<var>_step</var> &lt; 4) {
+  
+    <span class="expr4">/* 4 pinin her birine sırasıyla HIGH ve kalanlara LOW verilmesi için
+    için 4 kez işleme giren while döngüsü yazılmıştır. */</span>
+     
+    <span class="expr1">for</span>(<span class="expr3">int</span> i=0; i&lt;4; i++) {
+    
+    <span class="expr4">/* Ve for döngüsü içerisinde motorun _step indexindeki pinine
+    HIGH diğer pinlerine LOW verilmiştir. */</span>
+  
+    <span class="expr1">if</span>(i != <var>_step</var>){
+        <span class="expr2">digitalWrite</span>(<var>motor</var>[i], <span class="expr3">LOW</span>);
+      }else {
+          <span class="expr2">digitalWrite</span>(<var>motor</var>[i], <span class="expr3">HIGH</span>);
+        }
+    }
+
+    <span class="expr2">delay</span>(<var>delayTime</var>);
+
+    <span class="expr4">/* Her pine değeri verildikten sonra delayTime kadar motorun 
+    hareket edebilmesi için beklenmiştir.
+    Ardından _step değişkeni artırılarak sonraki çeyrek adıma geçilmiştir. */</span>
+    
+    <var>_step</var> ++;
+   }
+}
+                    </pre>
+                </code>
+                <code>
+                    <pre>
+<span class="expr3">void</span> <span class="expr2">moveBack</span>(<span class="expr3">int</span> <var>motor</var>[]) {
+  
+  <span class="expr4">/* Bu fonksiyonun moveNext fonksiyonundan tek farkı, tam adıma, 
+  motorun 3. indexteki pinine HIGH vererek başlaması ve
+  _step değişkeninin azaltarak ters yönde adım atılmasını sağlamasıdır. */</span>
+
+  <span class="expr3">int</span> <var>_step</var> = 3;
+
+  <span class="expr1">while</span>(<var>_step</var> &gt; -1) {
+
+   <span class="expr1">for</span>(<span class="expr3">int</span> i=0; i&lt;4; i++) {
+    
+    <span class="expr1">if</span>(i != <var>_step</var>){
+        <span class="expr2">digitalWrite</span>(<var>motor</var>[i], <span class="expr3">LOW</span>);
+      }else {
+          <span class="expr2">digitalWrite</span>(<var>motor</var>[i], <span class="expr3">HIGH</span>);
+        }
+    }
+    <span class="expr2">delay</span>(<var>delayTime</var>);
+    <var>_step</var> --;
+   }
+}
+                    </pre>
+                </code>
+
+                <p>
+                    Gripperın hareketini sağlamak için servo motoru kontrol eden bir fonksiyon yazılmıştır. Bu fonksiyonda joystick pininden
+                    değer okunarak, servo motor için uygun aralığa ölçeklenir ve uygulanır.
+                </p>
+
+                <code>
+                    <pre>
+<span class="expr3">void</span> <span class="expr2">gripper</span>() {
+
+    <span class="expr4">/* Bu fonksiyon servo motor aracılığı ile 
+    gripperı hareket ettirmek için kullanılır. Program içerisinde ikinci joyistiğin
+    y yönündeki değerine yani uPin'inden okunan değere göre çağırılır. */</span>
+    
+    <span class="expr4">/* analogRead fonksiyonu ile, ikinci joystiğin Y pini, uPin'den
+    0 ile 1024 arasında bir değer okunur. */</span>
+
+    <var>servoValue</var> = <span class="expr2">analogRead</span>(<var>uPin</var>);
+    
+    <span class="expr4">/* Ve bu değer map fonksiyonu ile 100 ile 900 aralığından
+    90 ile 185 arasında bir değere dönüştürülerek, servo motora verdiğimiz değeri tutan
+    servoValue değişkenine atanır. */</span>
+
+    <var>servoValue</var> = <span class="expr2">map</span>(<var>servoValue</var>, 100, 900, 90, 185);
+     
+    <span class="expr4">/* Daha sonra servo motor için hazırlanan bu değişkenin değeri 
+    write metodu ile servo motora verilir */</span>   
+    <var>servoMotor</var>.<span class="expr2">write</span>(<var>servoValue</var>);   
+    <span class="expr2">delay</span>(450);
+     
+    <span class="expr4">/* 450 milisaniye duraklatıldıktan sonra program akışına dönülür */</span>   
+    
+   }
+                </pre>
+                </code>
+
+                <p>
+                    Programın ana döngüsü olan loop fonksiyonu içerisinde robot kolun kontrolü sağlanmıştır. Bu fonksiyonda joystick pinlerinden
+                    değerler okunur, ve o değerlere göre moveBack, moveNext, gripper fonksiyonları çağırılır.
+                </p>
+
+                <code>
+                    <pre>
+<span class="expr3">void</span> <span class="expr2">loop</span>() {
+
+    <span class="expr4">/* Döngüye girildiğinde ilk olarak analogRead ile 
+    joysticklerin pinlerinden değerler okunur. */</span>  
+
+    <span class="expr3">int</span> <var>xValue</var> = <span class="expr2">analogRead</span>(<var>xPin</var>);
+    <span class="expr3">int</span> <var>yValue</var> = <span class="expr2">analogRead</span>(<var>yPin</var>);
+    <span class="expr3">int</span> <var>zValue</var> = <span class="expr2">analogRead</span>(<var>zPin</var>);
+    <span class="expr3">int</span> <var>uValue</var> = <span class="expr2">analogRead</span>(<var>uPin</var>);
+
+    <span class="expr4">/* Burada xValue ve yValue birinci joyistiğin pinlerinden okunan, 
+    zValue ve uValue ise ikinci joyistiğin pinlerinden okunan sırasıyla x ve y değerleridir. 
+    Joyistik yönlendirilmediğinde bu değerler 512 olmalıdır. */</span> 
+
+    <span class="expr4">/* Birinci joyistiğin değerleri ve ikinci joyistiğin x yönündeki değeri 
+    470'den küçük olduğunda her pin için belirlenen step motor geriye adım atmayı sağlayan 
+    moveBack fonksiyonuna gönderilir. 600'den büyük olduğunda ise ilgili step motor ileri 
+    adım atmayı sağlayan moveNext fonksiyonuna gönderilir. */</span> 
+    
+    <span class="expr4">/* İkinci joyistiğin y yönündeki değeri ise servo motoru yani gripperı kontrol eder.
+    470'den küçük olduğunda veya 600'den büyük olduğunda gripper fonksiyonu çağırılır ve gripperın
+    açılıp kapanması sağlanır. */</span>
+
+    <span class="expr1">if</span>(<var>yValue</var> &lt; 470) {
+      <span class="expr4">/// y degeri 470'den küçükse</span>
+      <span class="expr2">moveBack</span>(<var>motor1</var>);
+      
+      }<span class="expr1">else if</span>(<var>yValue</var> &gt; 600) {
+        <span class="expr4">/// y degeri 600'den büyükse</span>
+        <span class="expr2">moveNext</span>(<var>motor1</var>);
+        }
+    <span class="expr1">if</span>(<var>xValue</var> &lt; 470) {
+        <span class="expr4">/// x degeri 470'den küçükse</span>
+        <span class="expr2">moveBack</span>(<var>motor2</var>);
+      
+      }<span class="expr1">else if</span>(<var>xValue</var> &gt; 600) {
+        <span class="expr4">/// x degeri 600'den büyükse</span>
+        <span class="expr2">moveNext</span>(<var>motor2</var>);
+        }
+    <span class="expr1">if</span>(<var>zValue</var> &lt; 470) {
+        <span class="expr4">/// z degeri 470'den küçükse</span>
+        <span class="expr2">moveBack</span>(<var>motor3</var>);
+      
+      }<span class="expr1">else if</span>(<var>zValue</var> &gt; 600) {
+        <span class="expr4">/// z degeri 600'den büyükse</span>
+        <span class="expr2">moveNext</span>(<var>motor3</var>);
+        }
+    <span class="expr1">if</span>(<var>uValue</var> &lt; 470) {
+        <span class="expr4">/// u degeri 470'den küçükse</span>
+        <span class="expr2">gripper</span>();
+      
+      }<span class="expr1">else if</span>(<var>uValue</var> &gt; 600) {
+        <span class="expr4">/// u degeri 600'den büyükse</span>
+        <span class="expr2">gripper</span>();
+    }  
+}
+                </pre>
+                </code>
+        </div>
+
+    </section>
+    <footer class="section">
+        <small>Sivas - 2018</small> 
+    </footer>
+    <script src="./js/yeni.js"></script>
+</body>
+
+</html>   

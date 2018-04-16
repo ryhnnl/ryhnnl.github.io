@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116990910-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-116990910-1');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CrazyRob</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+</head>
+
+<body>
+
+    <nav>
+        <a href="#" class="active">Başlangıç</a>
+        <a href="#malzemeler">Malzemeler</a>
+        <a href="#mekanik">Mekanik</a>
+        <a href="#devre">Elektronik Devre</a>
+        <a href="./index.html">Anasayfa</a>
+        <button class="menu">&#9776;</button>
+    </nav>
+
+    <section class="section start">
+            <span class="fixme" id="start"> &nbsp; </span>
+            <h1>
+                <span class="text-colored">CrazyRob</span> Donanım Kısmı</h1>
+            <h3>Gömülü Sistemler Projesi - 2018</h3>
+    </section>
+
+    <!--MALZEMELER-->
+    <section class="section">
+        <span class="fixme" id="malzemeler"> &nbsp; </span>
+        
+        <div class="titlebox">
+            <h3>Malzemeler</h3>
+            <div class="border"></div>
+        </div>
+<!--
+        <table>
+            <tr><th>Malzeme</th><th>Adet</th></tr>
+            <tr><td>Step Motor</td><td>4</td></tr>
+            <tr><td>Servo Motor</td><td>1</td></tr>
+            <tr><td>Kayış</td><td>4m</td></tr>
+            <tr><td>3D Malzemeler</td><td>-</td></tr>
+            <tr><td>İskelet Malzemeleri(MVC)</td><td>1m&sup2;</td></tr>
+            <tr><td>Bluetooth Adaptörü</td><td>1</td></tr>
+            <tr><td>Joystick</td><td>2</td></tr>
+            <tr><td>Güç Adaptörü</td><td>1</td></tr>
+            <tr><td>Krom Mil</td><td>-</td></tr>
+            <tr><td>Dişi-Erkek Kablo</td><td>-</td></tr>
+        </table>
+    -->   
+        <div class="flex-container materials">
+                <div class="flex-item">
+                    <img src="./img/materials/arduino3.png" alt="Arduino Mega 2560">
+                    <div class="name">Arduino Mega</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/stepmotorvesurucukarti.jpeg" alt="Step Motor ve Sürücü Kartı">
+                    <div class="name">Step Motor ve Sürücü Kartı</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/servo.jpeg" alt="Servo Motor">
+                    <div class="name">Servo Motor</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/kayisvecark.jpeg" alt="Kayış ve Çark">
+                    <div class="name">Dişli Kayış ve Çark</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/joystick2.jpeg" alt="Joystick">
+                    <div class="name">Joystick</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/bluetoothmodule.png" alt="Bluetooth Modülü">
+                    <div class="name">Bluetooth Adaptörü</div>
+                </div>
+                <div class="flex-item">
+                    <img src="./img/materials/misina.jpeg" alt="Misina">
+                    <div class="name">Misina</div>
+                </div>
+        </div>
+
+    </section> 
+    
+    <!--MEKANİK-->
+    <section class="section">
+        <span class="fixme" id="mekanik"> &nbsp; </span>
+        
+        <div class="titlebox">
+            <h3>Mekanik</h3>
+            <div class="border"></div>
+        </div>
+
+        <div class="text-content">
+
+            <div class="image-container">
+            <div class="slider">
+                <div class="slide" style="background-image:url(./img/hardware/mekanik1.jpeg)"></div>
+                <div class="slide" style="background-image:url(./img/hardware/mekanik2.jpeg)"></div>
+                <div class="slide" style="background-image:url(./img/hardware/mekanik3.jpeg)"></div>
+                <div class="slide" style="background-image:url(./img/hardware/mekanik4.jpeg)"></div>
+                <div class="slide" style="background-image:url(./img/hardware/mekanik0.jpeg)"></div>
+            </div></div>
+
+            <p>
+                Projemizin temeldeki iskelet çizimleri Thinkercad üzerinde gerçekleştirilmiştir.
+                Bu çizimlere göre parçalar kesilmiş, birleştirilmiş ve temel iskelet yapısı
+                oluşturulmuştur.
+            </p>
+
+            <div class="image-container">
+                <img src="./img/hardware/mekanik5.png" alt="Mekanik Parça">
+                <img src="./img/hardware/mekanik6.png" alt="Mekanik Parça">
+            </div>
+
+            <p>
+                Robot kolun mekanik kısmı için gerekli malzemeler temin edildikten sonra ise
+                SolidWorks üzerinde çizimi yapılan mekanik bileşenler milimetrik olarak 
+                oluşturulmuştur. 
+            </p>
+
+            <div class="image-container">
+                <img src="./img/hardware/mekanik7.png" alt="Robot Kol Mekaniği">
+                <img src="./img/hardware/mekanik8.png" alt="Rbot Kol Mekaniği">
+            </div>
+    
+
+            <p>
+                Soldaki resimde, robot kolun 1 ile numaralandırılan ekseni 1 adet step motor ile robot kolun
+                o eksende hareket etmesini sağlamaktadır. 2 ile numaralandırılan eksende hareket ise
+                birbirine paralel, robot kolun gövdesine sabitlenmiş 2 adet step motor 
+                tarafından sağlanmaktadır. Bu step motorlar birbirlerine paralel şekilde çalışmaları 
+                gerektiğinden ikisinin de başlangıç ve bitiş pozisyonları eş zamanlı ayarlanmıştır. 
+            </p>
+
+            <p>
+                Sağdaki resimde, 3 ile numaralandırılmış eksen boyunca hareket ise yine bir step motorun
+                dönme hareketi ile sağlanmıştır. Önceki hareketlerdeki sistem, dişli kayış ve çarklarla
+                sağlanırken burada bir çeşit makara sistemi ile sağlanmıştır.
+            </p>
+
+            <p>
+                Mekanik kısmın son aşamasında ise 3D yazıcıdan çıkarılan gripper, son eksenin ucuna
+                bir servo motor ile kontrol edilmek üzere eklenmiştir.
+            </p>
+ 
+        </div>
+
+    </section>
+
+    <!--ELEKTRONİK DEVRE-->
+    <section class="section">
+        <span class="fixme" id="devre"> &nbsp; </span>
+        
+        <div class="titlebox">
+            <h3>Elektronik Devre</h3>
+            <div class="border"></div>
+        </div>          
+        <img src="./img/hardware/devre.png" alt="Elektronik Devre" style="max-height: 30vw; margin: 2%;">
+    </section>
+
+    <!--BOŞ-->
+    <section class="section"></section>
+
+    <footer class="section">
+        <small>Sivas - 2018</small>
+    </footer>
+
+    <script src="./js/yeni.js"></script>
+
+</body>
+</html>

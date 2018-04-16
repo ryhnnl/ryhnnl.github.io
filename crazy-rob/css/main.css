@@ -228,13 +228,14 @@ h3 {
 }
 /* FLEX for MATERIALS*/
 .flex-container.materials .flex-item {
-	min-height: 180px;
-	max-width: 180px;
+	min-height: 140px;
+	max-width: 140px;
+	font-size: small;
 }
 .flex-container.materials .flex-item img {
-	height: 120px;
-	width: 120px;
-	border-radius: 75px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50px;
 }
 
 /*SECTION LINKS*/
@@ -286,4 +287,109 @@ div.text-content p {
 div.text-content code {
 	background: var(--light-color);
 	padding: 2%;
+}
+
+/*TABLE*/
+table tr th {
+	color: var(--color);
+	font-weight: bolder;
+}
+table tr td {
+	padding: 0.4em;
+	font-weight: lighter;
+}
+table {
+	margin: 1em;
+}
+/*SLIDER*/
+
+/* İçerik slideshow */
+
+.slider {
+	height: 200px;
+	width: 400px;
+	position: relative;
+	background-color: var(--dark-color);
+	overflow: hidden;
+}
+
+.slider .slide {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: var(--dark-color);
+	overflow: hidden;
+	position: absolute;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	animation: slide 8s infinite;
+}
+
+.slider .slide p {
+	text-align: center;
+	margin: 20% auto;
+	font-size: xx-large;
+	color: var(--light-color);
+}
+
+.slider .slide:nth-of-type(1) {
+	left: 0%;
+	animation-delay: -1s;
+}
+.slider .slide:nth-of-type(2) {
+	animation-delay: 1s;
+}
+.slider .slide:nth-of-type(3) {
+	animation-delay: 3s;
+}
+.slider .slide:nth-of-type(4) {
+	left: 0%;
+	animation-delay: 5s;
+}
+
+@keyframes slide {
+	0% {
+		left: 100%;
+		width: 100%;
+	}
+	5% {
+		left: 0%;
+	}
+	25% {
+		left: 0%;
+	}
+	30% {
+		left: -100%;
+		width: 100%;
+	}
+	30.0001% {
+		left: -100%;
+		width: 0%;
+	}
+	100% {
+		left: 100%;
+		width: 0%;
+	}
+}
+@media screen and (max-width: 400px) {
+	.slider {
+		height: 200px;
+		width: 200px;
+	}
+}
+/*IMAGE CONTAINER*/
+
+.image-container {
+	display: flex;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: auto;
+	grid-auto-flow: dense;
+	grid-gap: 10px;
+	max-height: 400px;
+	justify-content: center;
+	align-items: center;
+}
+.image-container img {
+	max-height: 200px;
 }
