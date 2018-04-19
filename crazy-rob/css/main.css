@@ -415,8 +415,15 @@ table {
 }
 .flex-container.video video {
 	max-width: 100%;
+	max-height: 330px;
 }
 
+@media screen and (max-width: 827px) {
+	video {
+		height: 330px;
+		width: 100%;
+	}
+}
 @media screen and (max-width: 753px) {
 	video {
 		height: 300px;
