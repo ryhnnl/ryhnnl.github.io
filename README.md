@@ -1,2 +1,2 @@
-# My web experiments from now on
+# My one page git page
 ## :bowtie:
